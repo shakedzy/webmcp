@@ -1,0 +1,25 @@
+[project]
+name = "web-mcp"
+version = "0.1.0"
+description = "The ultimate web-access MCP server: extended Playwright with stealth, free web search, and HTML-to-Markdown conversion"
+requires-python = ">=3.12"
+dependencies = [
+    "fastmcp",
+    "playwright",
+    "camoufox[geoip]",
+    "cloakbrowser",
+    "ddgs",
+    "markdownify",
+    "trafilatura",
+    "httpx",
+]
+
+[project.scripts]
+web-mcp = "web_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/web_mcp"]
