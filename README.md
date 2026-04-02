@@ -24,13 +24,30 @@ uv run playwright install
 
 ## Usage
 
-### Run MCP server (stdio)
+### Run MCP server over stdio
 
 ```bash
 uv run python -m web_mcp
 ```
 
-### Add to MCP configuration
+### Run MCP server over HTTP 
+
+1. Start Web MCP in HTTP mode:
+
+```bash
+uv run python -m web_mcp --http
+```
+
+By default, MCP server will run at:
+```text
+http://127.0.0.1:9000/mcp
+```
+
+- `--host` — bind address; default `127.0.0.1`, or set `WEB_MCP_HOST`.
+- `--port` — bind port; default `9000`, or set `WEB_MCP_PORT`.
+- `--path` — MCP URL path; default `/mcp`, or set `WEB_MCP_PATH`.
+
+### Add to MCP configuration (stdio-based)
 
 ```json
 {
