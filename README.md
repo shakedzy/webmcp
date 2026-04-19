@@ -87,6 +87,7 @@ http://127.0.0.1:9000/mcp
 | `browser_console_messages` | Get console output |
 | `browser_network_requests` | Get network request log |
 | `browser_get_html` | Get page HTML source |
+| `browser_get_as_markdown` | Current page HTML as Markdown (same conversion as `fetch_as_markdown`) |
 | `browser_close` | Close the browser |
 
 ### Search Tools
@@ -103,6 +104,6 @@ http://127.0.0.1:9000/mcp
 |------|-------------|
 | `html_to_markdown` | Convert HTML to Markdown as-is (full structure) |
 | `extract_article` | Extract article from HTML via Trafilatura |
-| `fetch_page` | HTTP-fetch a URL, return raw HTML |
+| `fetch_raw_page_as_html` | HTTP-fetch a URL, return raw HTML |
 | `fetch_as_markdown` | HTTP-fetch + convert to Markdown |
 | `fetch_article` | HTTP-fetch + extract article |

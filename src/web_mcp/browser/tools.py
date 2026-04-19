@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import base64
 from typing import Literal
 
@@ -312,8 +313,29 @@ async def browser_network_requests(
 async def browser_get_html(
     ctx: Context = None,  # type: ignore[assignment]
 ) -> str:
-    """Get the full HTML source of the current page."""
+    """Get the full HTML source of the current page.
+
+    [!] DO NOT use this tool unless you absolutely need the raw HTML. 
+        In most cases, using `browser_get_as_markdown` is the right way to go.
+        The output of this tool may be extremely long, use it only when truly required.
+    """
     return await _mgr(ctx).execute(_mgr(ctx).get_html)
+
+
+@mcp.tool
+async def browser_get_as_markdown(
+    ctx: Context = None,  # type: ignore[assignment]
+) -> str:
+    """Convert the current page HTML to Markdown (as-is, no content filtering).
+
+    Same conversion as fetch_as_markdown: full structural Markdown with script/style stripped.
+    """
+    html = await _mgr(ctx).execute(_mgr(ctx).get_html)
+    from markdownify import markdownify as md
+
+    return await asyncio.to_thread(
+        md, html, heading_style="ATX", strip=["script", "style"]
+    )
 
 
 @mcp.tool

@@ -44,7 +44,7 @@ async def extract_article(
     include_comments: bool = False,
     ctx: Context = None,  # type: ignore[assignment]
 ) -> str:
-    """Extract article content from HTML using Trafilatura.
+    """Extract article content from HTML and convert to Markdown.
 
     Strips navigation, ads, sidebars, and other clutter. Returns clean Markdown
     plus metadata (title, author, date) when available.
@@ -90,12 +90,15 @@ async def extract_article(
 
 
 @mcp.tool
-async def fetch_page(
+async def fetch_raw_page_as_html(
     url: str,
     headers: dict[str, str] | None = None,
     ctx: Context = None,  # type: ignore[assignment]
 ) -> str:
-    """Fetch a URL via HTTP and return the raw HTML.
+    """Fetch a URL via HTTP and return the raw HTML. 
+    [!] DO NOT use this tool unless you absolutely need the raw HTML. 
+        In most cases, using `fetch_as_markdown` is the right way to go.
+        The output of this tool may be extremely long, use it only when truly required.
 
     This is a lightweight fetch (no JavaScript rendering). For JS-heavy pages,
     use browser_navigate + browser_get_html instead.
@@ -141,7 +144,9 @@ async def fetch_article(
     headers: dict[str, str] | None = None,
     ctx: Context = None,  # type: ignore[assignment]
 ) -> str:
-    """Fetch a URL and extract the article content via Trafilatura.
+    """Fetch a URL and extract the article to Markdown.
+    Use this tool when accessing news articles, blog-posts or similar content.
+    In other cases it may return empty or partial results.
 
     Combines fetch_page + extract_article in one call. Returns clean Markdown
     with metadata.

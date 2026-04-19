@@ -262,7 +262,8 @@ async def test_mcp_registration():
 
     expected_browser = [
         "browser_click", "browser_close", "browser_configure", "browser_console_messages",
-        "browser_drag", "browser_evaluate", "browser_fill_form", "browser_get_html",
+        "browser_drag", "browser_evaluate", "browser_fill_form", "browser_get_as_markdown",
+        "browser_get_html",
         "browser_handle_dialog", "browser_hover", "browser_navigate", "browser_navigate_back",
         "browser_network_requests", "browser_press_key", "browser_resize",
         "browser_select_option", "browser_snapshot", "browser_tabs",
@@ -272,7 +273,7 @@ async def test_mcp_registration():
     expected_content = ["html_to_markdown", "extract_article", "fetch_page", "fetch_as_markdown", "fetch_article"]
     all_expected = expected_browser + expected_search + expected_content
 
-    result("total_tool_count", len(tools) == 30, f"{len(tools)} tools")
+    result("total_tool_count", len(tools) == 31, f"{len(tools)} tools")
 
     missing = [t for t in all_expected if t not in tool_names]
     result("all_tools_present", len(missing) == 0, f"missing: {missing}" if missing else "all present")
